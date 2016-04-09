@@ -109,7 +109,7 @@ public class MessageTimerModificado extends Timer {
 		} else { // there's no reciever => broadcast the message
 			//this.node.broadcast(msg);
 			//checar se é par
-			if (rand < 33 || this.node.ID == 1) {
+			if (rand < sendChance || this.node.ID == 1) {
 				System.out.println("PAR TRANSMITINDO");
 				this.node.broadcast(msg);
 				Tools.appendToOutput("\n\n TIME: "+ deci.format(Global.currentTime));
