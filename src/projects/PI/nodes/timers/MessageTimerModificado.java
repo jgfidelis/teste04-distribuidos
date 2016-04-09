@@ -42,6 +42,7 @@ import sinalgo.nodes.timers.Timer;
 import sinalgo.runtime.Global;
 import sinalgo.tools.Tools;
 import java.text.DecimalFormat;
+import java.util.Random;
 
 import projects.PI.nodes.nodeImplementations.PINode;
 
@@ -54,6 +55,7 @@ public class MessageTimerModificado extends Timer {
 	private Node receiver; // the receiver of the message, null if the message should be broadcast
 	private Message msg; // the message to be sent
 	private double time;
+	private int sendChance;
 	DecimalFormat deci = new DecimalFormat("0.0000");
 
 	/**
@@ -91,14 +93,23 @@ public class MessageTimerModificado extends Timer {
 		this.time = time;
 		this.receiver = null; // indicates broadcasting
 	}
+	
+	public MessageTimerModificado(Message msg, int sendChance) {
+		this.msg = msg;
+		this.time = -1;
+		this.receiver = null;
+		this.sendChance = sendChance;
+	}
+	
 	@Override
 	public void fire() {
+		int rand = new Random().nextInt(100);
 		if(receiver != null) { // there's a receiver => unicast the message
 			this.node.send(msg, receiver);
 		} else { // there's no reciever => broadcast the message
 			//this.node.broadcast(msg);
 			//checar se é par
-			if (this.node.ID % 2 == 0 || this.node.ID == 1) {
+			if (rand < 33 || this.node.ID == 1) {
 				System.out.println("PAR TRANSMITINDO");
 				this.node.broadcast(msg);
 				Tools.appendToOutput("\n\n TIME: "+ deci.format(Global.currentTime));

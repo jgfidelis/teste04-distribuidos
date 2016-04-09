@@ -112,6 +112,18 @@ public class CustomGlobal extends AbstractCustomGlobal{
 		System.out.println("\nMensagens INF transmitidas resetadas");
 	}
 	
+	@AbstractCustomGlobal.CustomButton(buttonText="Aumenta porcentagem", toolTipText="Porcentagem")
+	public void increaseProbability() {
+		PINode.sendChance++;
+		System.out.println("\nChance de transmissão: " + PINode.sendChance);
+	}
+	
+	@AbstractCustomGlobal.CustomButton(buttonText="Diminui porcentagem", toolTipText="Porcentagem")
+	public void decreaseProbability() {
+		PINode.sendChance--;
+		System.out.println("\nChance de transmissão: " + PINode.sendChance);
+	}
+	
 	@Override
 	public void onExit() {
 		// TODO Auto-generated method stub				

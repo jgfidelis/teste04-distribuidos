@@ -16,6 +16,7 @@ import sinalgo.tools.Tools;
 public class PINode extends Node {
 	private boolean reached = false;
 	public static int sentINF = 0;
+	public static int sendChance = 50;
 	
 		
 	DecimalFormat deci = new DecimalFormat("0.0000");
@@ -37,9 +38,8 @@ public class PINode extends Node {
 					this.reached = true;
 					Tools.appendToOutput("\n\n TIME: "+ deci.format(Global.currentTime));
 					Tools.appendToOutput("\n Node " + this.ID +" recebeu INF de"+ sender);
-					MessageTimerModificado infMSG = new MessageTimerModificado(msg);
+					MessageTimerModificado infMSG = new MessageTimerModificado(msg, sendChance);
 					infMSG.startRelative(1,this);
-					System.out.println("HELLO");
 						
 				}
 			}
