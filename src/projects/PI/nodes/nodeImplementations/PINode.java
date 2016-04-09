@@ -29,6 +29,7 @@ public class PINode extends Node {
 		while(inbox.hasNext()) {
 			Message msg = inbox.next();
 			sender = inbox.getSender().ID;
+			((INFMessage)msg).setHops(((INFMessage)msg).getHops() + 1);
 			
 			//N� recebeu uma mensagem INF	
 			if(msg instanceof INFMessage) {

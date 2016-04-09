@@ -4,12 +4,11 @@ import sinalgo.nodes.messages.Message;
 
 public class INFMessage extends Message {
 	public int senderID;
-
+	private int hops;
 	
 	public INFMessage(int senderID) {
 		this.senderID = senderID;
 	}
-
 
 	@Override
 	public Message clone() {
@@ -17,7 +16,14 @@ public class INFMessage extends Message {
 		return new INFMessage(this.senderID);
 	}
 
-	
+	public int getHops() {
+		return hops;
+	}
+
+	public void setHops(int hops) {
+		this.hops = hops;
+	}
+
 
 	public int getSenderID() {
 		return senderID;
