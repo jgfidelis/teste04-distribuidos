@@ -101,17 +101,20 @@ public class CustomGlobal extends AbstractCustomGlobal{
 	 * with a text 'GO'. Alternatively, you can specify an icon that is shown on the button. See
 	 * AbstractCustomGlobal.CustomButton for more details.   
 	 */
-	@AbstractCustomGlobal.CustomButton(buttonText="GO", toolTipText="A sample button")
-	public void sampleButton() {
-		JOptionPane.showMessageDialog(null, "You Pressed the 'GO' button.");
+	@AbstractCustomGlobal.CustomButton(buttonText="INF", toolTipText="Print INF transmitidas")
+	public void printINF() {
+		System.out.println("\nMensagens INF transmitidas: "+ PINode.sentINF);
+	}
+	
+	@AbstractCustomGlobal.CustomButton(buttonText="Reset INF", toolTipText="Reseta a contagem de mensagens transmitidas")
+	public void resetINF() {
+		PINode.sentINF = 0;
+		System.out.println("\nMensagens INF transmitidas resetadas");
 	}
 	
 	@Override
 	public void onExit() {
-		// TODO Auto-generated method stub
-		System.out.println("\n\nMensagens INF transmitidas: "+ PINode.sentINF);
-				 
-				
+		// TODO Auto-generated method stub				
 		
 	}
 	
