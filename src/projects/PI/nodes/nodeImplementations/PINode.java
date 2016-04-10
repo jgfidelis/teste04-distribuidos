@@ -17,7 +17,7 @@ public class PINode extends Node {
 	private boolean reached = false;
 	public static int numberNodes = 0;
 	public static int sentINF = 0;
-	public static int sendChance = 30;
+	public static double sendChance = 30.0;
 	
 		
 	DecimalFormat deci = new DecimalFormat("0.0000");

@@ -56,7 +56,7 @@ public class MessageTimerModificado extends Timer {
 	private Node receiver; // the receiver of the message, null if the message should be broadcast
 	private Message msg; // the message to be sent
 	private double time;
-	private int sendChance;
+	private double sendChance;
 	DecimalFormat deci = new DecimalFormat("0.0000");
 
 	/**
@@ -83,19 +83,8 @@ public class MessageTimerModificado extends Timer {
 		this.time = -1; // indicates aperiodicity 
 		this.receiver = null; // indicates broadcasting
 	}
-	/**
-	 * Creates a MessageTimer object that periodically broadcasts a message when the timer fires.
-	 *
-	 * @param msg The message to be sent when this timer fires.
-	 * @param time The data rate 
-	 */
-	public MessageTimerModificado(Message msg, double time) {
-		this.msg = msg;
-		this.time = time;
-		this.receiver = null; // indicates broadcasting
-	}
 	
-	public MessageTimerModificado(Message msg, int sendChance) {
+	public MessageTimerModificado(Message msg, double sendChance) {
 		this.msg = msg;
 		this.time = -1;
 		this.receiver = null;
@@ -110,7 +99,8 @@ public class MessageTimerModificado extends Timer {
 		} else { // there's no reciever => broadcast the message
 			//this.node.broadcast(msg);
 			//checar se é par
-			float chance = sendChance+((INFMessage)msg).getHops()*(1/2);
+			double factor = ((double)((INFMessage)msg).getHops())*(0.5);
+			double chance = sendChance+factor;
 			if (rand <  chance|| this.node.ID == 1) {
 				System.out.println("Mandou msg com " + chance + " chance");
 				((INFMessage)msg).setHops(((INFMessage)msg).getHops() + 1);
