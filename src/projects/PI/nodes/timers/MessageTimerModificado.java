@@ -44,6 +44,7 @@ import sinalgo.tools.Tools;
 import java.text.DecimalFormat;
 import java.util.Random;
 
+import projects.PI.nodes.messages.INFMessage;
 import projects.PI.nodes.nodeImplementations.PINode;
 
 /**
@@ -109,15 +110,16 @@ public class MessageTimerModificado extends Timer {
 		} else { // there's no reciever => broadcast the message
 			//this.node.broadcast(msg);
 			//checar se é par
-			if (rand < sendChance || this.node.ID == 1) {
-				System.out.println("PAR TRANSMITINDO");
+			float chance = sendChance+((INFMessage)msg).getHops()*(1/2);
+			if (rand <  chance|| this.node.ID == 1) {
+				System.out.println("Mandou msg com " + chance + " chance");
+				((INFMessage)msg).setHops(((INFMessage)msg).getHops() + 1);
+				System.out.println(((INFMessage)msg).getHops());
 				this.node.broadcast(msg);
 				Tools.appendToOutput("\n\n TIME: "+ deci.format(Global.currentTime));
 		  		Tools.appendToOutput("\n Node "+ this.node.ID +" transmitiu INF");
 		  		PINode.sentINF = PINode.sentINF + 1; 
 			}
-
-
 		}
 	}
 }

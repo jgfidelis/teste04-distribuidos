@@ -15,8 +15,9 @@ import sinalgo.tools.Tools;
 
 public class PINode extends Node {
 	private boolean reached = false;
+	public static int numberNodes = 0;
 	public static int sentINF = 0;
-	public static int sendChance = 50;
+	public static int sendChance = 30;
 	
 		
 	DecimalFormat deci = new DecimalFormat("0.0000");
@@ -29,12 +30,12 @@ public class PINode extends Node {
 		while(inbox.hasNext()) {
 			Message msg = inbox.next();
 			sender = inbox.getSender().ID;
-			((INFMessage)msg).setHops(((INFMessage)msg).getHops() + 1);
 			
 			//N� recebeu uma mensagem INF	
 			if(msg instanceof INFMessage) {
 				//Verifica se � a primeira vez que o n� recebe INF
 				if(!this.reached){
+					numberNodes--;
 					this.setColor(Color.GREEN);
 					this.reached = true;
 					Tools.appendToOutput("\n\n TIME: "+ deci.format(Global.currentTime));
@@ -52,11 +53,12 @@ public class PINode extends Node {
 
     @Override
 	public void init() {
+    	numberNodes++;
 		//Considerando que o n� 1 tem a mensagem inf
 		if (this.ID==1){
 			this.setColor(Color.RED);
 			this.reached = true;
-			MessageTimerModificado infMSG = new MessageTimerModificado (new INFMessage(this.ID));
+			MessageTimerModificado infMSG = new MessageTimerModificado (new INFMessage(this.ID, 0));
 	  		infMSG.startRelative(0.1, this);
 		}
 	}

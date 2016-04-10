@@ -6,14 +6,15 @@ public class INFMessage extends Message {
 	public int senderID;
 	private int hops;
 	
-	public INFMessage(int senderID) {
+	public INFMessage(int senderID, int hops) {
 		this.senderID = senderID;
+		this.hops = hops;
 	}
 
 	@Override
 	public Message clone() {
 		// TODO Auto-generated method stub
-		return new INFMessage(this.senderID);
+		return new INFMessage(this.senderID, this.hops);
 	}
 
 	public int getHops() {

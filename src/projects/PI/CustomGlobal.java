@@ -124,6 +124,17 @@ public class CustomGlobal extends AbstractCustomGlobal{
 		System.out.println("\nChance de transmissão: " + PINode.sendChance);
 	}
 	
+	@AbstractCustomGlobal.CustomButton(buttonText="Nos visitados", toolTipText="Porcentagem")
+	public void checkIntegrity() {
+		System.out.println("\nNos nao visitados: " + PINode.numberNodes);
+	}
+	
+	@AbstractCustomGlobal.CustomButton(buttonText="Nos reset", toolTipText="Porcentagem")
+	public void resetNodes() {
+		PINode.numberNodes = 0;
+		System.out.println("\nNos visitados: " + PINode.numberNodes);
+	}
+	
 	@Override
 	public void onExit() {
 		// TODO Auto-generated method stub				
