@@ -2,6 +2,9 @@ package projects.PI.nodes.nodeImplementations;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
+
 import projects.PI.nodes.messages.INFMessage;
 import projects.PI.nodes.timers.MessageTimer;
 import projects.PI.nodes.timers.MessageTimerModificado;
@@ -14,7 +17,7 @@ import sinalgo.runtime.Global;
 import sinalgo.tools.Tools;
 
 public class PINode extends Node {
-	private boolean reached = false;
+	private boolean[] reached = new boolean[INSTANCIAS];
 	public static int numberNodes = 0;
 	public static int sentINF = 0;
 	public static double sendChance = 40.0;
@@ -37,10 +40,10 @@ public class PINode extends Node {
 			//N� recebeu uma mensagem INF	
 			if(msg instanceof INFMessage) {
 				//Verifica se � a primeira vez que o n� recebe INF
-				if(!this.reached){
+				if(!this.reached[((INFMessage) msg).getSeq()]){
 					numberNodes--;
 					this.setColor(Color.GREEN);
-					this.reached = true;
+					this.reached[((INFMessage) msg).getSeq()] = true;
 					Tools.appendToOutput("\n\n TIME: "+ deci.format(Global.currentTime));
 					Tools.appendToOutput("\n Node " + this.ID +" recebeu INF de"+ sender);
 					MessageTimerModificado infMSG = new MessageTimerModificado(msg, sendChance);
@@ -60,9 +63,9 @@ public class PINode extends Node {
 		//Considerando que o n� 1 tem a mensagem inf
 		if (this.ID==1){
 			this.setColor(Color.RED);
-			this.reached = true;
 			for (int i = 0; i < INSTANCIAS; i++) {
-				MessageTimerModificado infMSG = new MessageTimerModificado (new INFMessage(this.ID, 0));
+				this.reached[i] = true;
+				MessageTimerModificado infMSG = new MessageTimerModificado (new INFMessage(this.ID, 0, i));
 				infMSG.startRelative(0.1+INTERVALO_INSTANCIAS*i, this);
 			}	  		
 		}
