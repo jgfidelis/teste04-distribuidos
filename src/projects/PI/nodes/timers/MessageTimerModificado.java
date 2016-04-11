@@ -102,9 +102,9 @@ public class MessageTimerModificado extends Timer {
 			double factor = ((double)((INFMessage)msg).getHops())*(0.5);
 			double chance = sendChance+factor;
 			if (rand <  chance|| this.node.ID == 1) {
-				System.out.println("Mandou msg com " + chance + " chance");
+				//System.out.println("Mandou msg com " + chance + " chance");
 				((INFMessage)msg).setHops(((INFMessage)msg).getHops() + 1);
-				System.out.println(((INFMessage)msg).getHops());
+				//System.out.println(((INFMessage)msg).getHops());
 				this.node.broadcast(msg);
 				Tools.appendToOutput("\n\n TIME: "+ deci.format(Global.currentTime));
 		  		Tools.appendToOutput("\n Node "+ this.node.ID +" transmitiu INF");

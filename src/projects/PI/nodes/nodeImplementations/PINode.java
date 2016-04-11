@@ -17,7 +17,10 @@ public class PINode extends Node {
 	private boolean reached = false;
 	public static int numberNodes = 0;
 	public static int sentINF = 0;
-	public static double sendChance = 30.0;
+	public static double sendChance = 40.0;
+	
+	private static final int INSTANCIAS = 1000;
+	private static final int INTERVALO_INSTANCIAS = 5;
 	
 		
 	DecimalFormat deci = new DecimalFormat("0.0000");
@@ -58,8 +61,10 @@ public class PINode extends Node {
 		if (this.ID==1){
 			this.setColor(Color.RED);
 			this.reached = true;
-			MessageTimerModificado infMSG = new MessageTimerModificado (new INFMessage(this.ID, 0));
-	  		infMSG.startRelative(0.1, this);
+			for (int i = 0; i < INSTANCIAS; i++) {
+				MessageTimerModificado infMSG = new MessageTimerModificado (new INFMessage(this.ID, 0));
+				infMSG.startRelative(0.1+INTERVALO_INSTANCIAS*i, this);
+			}	  		
 		}
 	}
     
