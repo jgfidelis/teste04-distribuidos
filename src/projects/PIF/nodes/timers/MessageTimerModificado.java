@@ -105,6 +105,7 @@ public class MessageTimerModificado extends Timer {
 				
 				if (this.node.ID == 1) {
 					this.node.broadcast(msg);
+					sent = true;
 				}
 				
 				if (((INFMessage) msg).numero == 1) {
