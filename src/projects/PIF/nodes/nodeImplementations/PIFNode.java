@@ -66,7 +66,7 @@ public class PIFNode extends Node {
 				if (this.ID != 1){
 					if(msgFeedback.getDestinationID() == this.ID){
 						msgFeedback.setDestinationID(this.nextHopToSource);
-						MessageTimer feedbackMSG = new MessageTimer(msgFeedback);
+						MessageTimerModificado feedbackMSG = new MessageTimerModificado(msgFeedback);
 						feedbackMSG.startRelative(0.1,this);
 						//System.out.println("Node: "+this.ID+" Recebeu Feedback do Node "+ msgFeedback.getSourceFeedbackID() + " encaminhada pelo Node " +msgFeedback.getSenderID());	
 					}
@@ -80,7 +80,7 @@ public class PIFNode extends Node {
 			
 		
 	public void feedbackStart(){
-		MessageTimer feedbackMSG = new MessageTimer (new FEEDBACKMessage(this.ID, this.ID, this.nextHopToSource));
+		MessageTimerModificado feedbackMSG = new MessageTimerModificado (new FEEDBACKMessage(this.ID, this.ID, this.nextHopToSource));
 	  	feedbackMSG.startRelative(0.1, this);		
 	}
 	
