@@ -1,19 +1,19 @@
 package projects.PIF.nodes.nodeImplementations;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.HashMap;
+import java.util.Map;
 
 import projects.PIF.Utils;
 import projects.PIF.nodes.messages.FEEDBACKMessage;
 import projects.PIF.nodes.messages.INFMessage;
-import projects.PIF.nodes.timers.PIF_FeedbackTimer;
-import projects.PIF.nodes.timers.MessageTimer;
 import projects.PIF.nodes.timers.MessageTimerModificado;
+import projects.PIF.nodes.timers.PIF_FeedbackTimer;
 import sinalgo.configuration.WrongConfigurationException;
 import sinalgo.gui.transformation.PositionTransformation;
 import sinalgo.nodes.Node;
 import sinalgo.nodes.messages.Inbox;
 import sinalgo.nodes.messages.Message;
-import sinalgo.tools.Tools;
 
 public class PIFNode extends Node {
 	//private boolean reached = false;
@@ -22,6 +22,8 @@ public class PIFNode extends Node {
 	public static int sentFeedback = 0;
 	public static int receivedFeedback = 0;
 	public int vizinhos = 0;
+	public static int[] cobertura = new int[Utils.NUM_INSTANCES];
+	public static int nnodes = 0;
 	private boolean[] reached = new boolean[Utils.NUM_INSTANCES];
 	public static double sendChance = 40.0;
 	
@@ -48,7 +50,8 @@ public class PIFNode extends Node {
 				if(!this.reached[((INFMessage) msg).numero - 1])//se reached[msg.numero - 1] for false, marcar como recebida
 				{
 					this.setColor(Color.GREEN);
-					this.reached[((INFMessage) msg).numero -1 ] = true;	
+					this.reached[((INFMessage) msg).numero -1 ] = true;
+					cobertura[((INFMessage) msg).numero -1]++;
 					this.nextHopToSource = msgINF.getSenderID();
 					msgINF.setSenderID(this.ID);
 					MessageTimerModificado infMSG = new MessageTimerModificado(msgINF);
@@ -95,6 +98,7 @@ public class PIFNode extends Node {
     @Override
 	public void init() {
 		//Considerando que o n� 1 tem a mensagem inf
+    	nnodes++;
 		if (this.ID==1){
 			this.setColor(Color.RED);
 			this.nextHopToSource = this.ID;

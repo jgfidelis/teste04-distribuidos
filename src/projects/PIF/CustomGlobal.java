@@ -38,16 +38,12 @@ package projects.PIF;
 
 
     
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.Iterator;
-import java.util.Locale;
+import java.util.Map;
 
 import javax.swing.JOptionPane;
+
 import projects.PIF.nodes.nodeImplementations.PIFNode;
-import sinalgo.nodes.Node;
 import sinalgo.runtime.AbstractCustomGlobal;
-import sinalgo.tools.Tools;
 
 
 /**
@@ -106,13 +102,15 @@ public class CustomGlobal extends AbstractCustomGlobal{
 	}
 	
 	@Override
-	public void onExit() {
-		// TODO Auto-generated method stub
-		 
-				
+	public void onExit() {				
+		int i = 0;
 		System.out.println("\n\nMensagens INF transmitidas: "+ PIFNode.sentINF);
 		System.out.println("Mensagens FEEDBACK transmitidas: "+ PIFNode.sentFeedback);
 		System.out.println("Source recebeu FEEDBACK de: "+ PIFNode.receivedFeedback+ " nodes");
+		for(int nos_cobertos : PIFNode.cobertura) {
+			i++;
+			System.out.println("Cobertura na instancia " + i + ": " + nos_cobertos + " de " + PIFNode.nnodes);
+		}
 	}
 	
 
