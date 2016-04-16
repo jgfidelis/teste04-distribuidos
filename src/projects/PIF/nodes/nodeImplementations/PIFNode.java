@@ -101,6 +101,12 @@ public class PIFNode extends Node {
 			this.reached[0] = true;
 			MessageTimerModificado infMSG = new MessageTimerModificado (new INFMessage(this.ID, 1));
 	  		infMSG.startRelative(0.1, this);
+	  		//iniciando multiplas instancias
+	  		for (int i = 1; i < Utils.NUM_INSTANCES; i++) {
+	  			this.reached[i] = true;
+	  			infMSG = new MessageTimerModificado (new INFMessage(this.ID, i+1));
+	  			infMSG.startRelative(i*Utils.INTERVAL_INTANCES, this);
+	  		}
 		}
 	}
     
