@@ -20,8 +20,9 @@ public class PIFNode extends Node {
 	public static int sentINF = 0;
 	public static int sentFeedback = 0;
 	public static int receivedFeedback = 0;
-	private int vizinhos = 0;
+	public int vizinhos = 0;
 	private boolean[] reached = new boolean[Utils.NUM_INSTANCES];
+	public static double sendChance = 40.0;
 	
 	public enum TNO {TNO_FEEDBACK };
 	private PIF_FeedbackTimer feedbackTimer;
