@@ -7,6 +7,7 @@ import projects.PIF.nodes.messages.FEEDBACKMessage;
 import projects.PIF.nodes.messages.INFMessage;
 import projects.PIF.nodes.timers.PIF_FeedbackTimer;
 import projects.PIF.nodes.timers.MessageTimer;
+import projects.PIF.nodes.timers.MessageTimerModificado;
 import sinalgo.configuration.WrongConfigurationException;
 import sinalgo.gui.transformation.PositionTransformation;
 import sinalgo.nodes.Node;
@@ -50,7 +51,7 @@ public class PIFNode extends Node {
 					this.reached[((INFMessage) msg).numero -1 ] = true;	
 					this.nextHopToSource = msgINF.getSenderID();
 					msgINF.setSenderID(this.ID);
-					MessageTimer infMSG = new MessageTimer(msgINF);
+					MessageTimerModificado infMSG = new MessageTimerModificado(msgINF);
 					infMSG.startRelative(0.1,this);
 					
 					//Agenda o FEEDBACK
@@ -98,7 +99,7 @@ public class PIFNode extends Node {
 			this.setColor(Color.RED);
 			this.nextHopToSource = this.ID;
 			this.reached[0] = true;
-			MessageTimer infMSG = new MessageTimer (new INFMessage(this.ID, 1));
+			MessageTimerModificado infMSG = new MessageTimerModificado (new INFMessage(this.ID, 1));
 	  		infMSG.startRelative(0.1, this);
 		}
 	}
