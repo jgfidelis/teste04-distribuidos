@@ -103,6 +103,10 @@ public class MessageTimerModificado extends Timer {
 			if(msg instanceof INFMessage){
 				boolean sent = false;
 				
+				if (this.node.ID == 1) {
+					this.node.broadcast(msg);
+				}
+				
 				if (((INFMessage) msg).numero == 1) {
 					this.node.broadcast(msg); //se for a INF 1, fazer broadcast
 					sent = true;
@@ -124,7 +128,7 @@ public class MessageTimerModificado extends Timer {
 					
 				}
 				//System.out.println("Enviadas: "+ PIFNode.SentINF);
-				System.out.println("Node: "+ this.node.ID +" broadcast INF ");
+				System.out.println("Node: "+ this.node.ID +" broadcast INF numero " + ((INFMessage) msg).numero);
 				PIFNode.sentINF = PIFNode.sentINF + 1;
 			}
 			
@@ -133,11 +137,12 @@ public class MessageTimerModificado extends Timer {
 				PIFNode.sentFeedback = PIFNode.sentFeedback + 1;
 				//System.out.println("Feedback Enviadas: "+ PIFNode.SentFeedback);
 				if ( this.node.ID == ((FEEDBACKMessage) msg).getSourceFeedbackID() ){
-					System.out.println("Node: "+ this.node.ID +" broadcast FEEDBACK ");
+					//System.out.println("Node: "+ this.node.ID +" broadcast FEEDBACK ");
 					this.node.setColor(Color.MAGENTA);
 				}
-				else
-					System.out.println("Node: "+ this.node.ID +" encaminhou FEEDBACK do Node "+((FEEDBACKMessage) msg).getSourceFeedbackID()+" para o Node "+ ((FEEDBACKMessage) msg).getDestinationID());
+				else{
+					//System.out.println("Node: "+ this.node.ID +" encaminhou FEEDBACK do Node "+((FEEDBACKMessage) msg).getSourceFeedbackID()+" para o Node "+ ((FEEDBACKMessage) msg).getDestinationID());
+				}
 			}
 				
 		}

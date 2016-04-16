@@ -42,7 +42,7 @@ public class PIFNode extends Node {
 				if (((INFMessage) msg).numero == 1) {
 					vizinhos++; //vizinho achado			
 				}
-				System.out.println("Node: "+this.ID+" recebeu INF do Node  "+sender);
+				System.out.println("Node: "+this.ID+" recebeu INF numero " + String.valueOf(((INFMessage) msg).numero) + " do Node "+sender);
 				INFMessage msgINF = (INFMessage) msg;
 				
 				if(!this.reached[((INFMessage) msg).numero - 1])//se reached[msg.numero - 1] for false, marcar como recebida
@@ -68,10 +68,10 @@ public class PIFNode extends Node {
 						msgFeedback.setDestinationID(this.nextHopToSource);
 						MessageTimer feedbackMSG = new MessageTimer(msgFeedback);
 						feedbackMSG.startRelative(0.1,this);
-						System.out.println("Node: "+this.ID+" Recebeu Feedback do Node "+ msgFeedback.getSourceFeedbackID() + " encaminhada pelo Node " +msgFeedback.getSenderID());	
+						//System.out.println("Node: "+this.ID+" Recebeu Feedback do Node "+ msgFeedback.getSourceFeedbackID() + " encaminhada pelo Node " +msgFeedback.getSenderID());	
 					}
 				}else{ 
-					System.out.println("Source node recebeu Feedback do Node "+ msgFeedback.getSourceFeedbackID());
+					//System.out.println("Source node recebeu Feedback do Node "+ msgFeedback.getSourceFeedbackID());
 					receivedFeedback = receivedFeedback + 1;
 				}
 			}
