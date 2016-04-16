@@ -111,6 +111,7 @@ public class CustomGlobal extends AbstractCustomGlobal{
 			i++;
 			System.out.println("Cobertura na instancia " + i + ": " + nos_cobertos + " de " + PIFNode.nnodes);
 		}
+		System.out.println(Utils.NUM_INSTANCES);
 	}
 	
 

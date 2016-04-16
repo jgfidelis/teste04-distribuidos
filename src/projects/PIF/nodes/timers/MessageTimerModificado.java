@@ -116,8 +116,10 @@ public class MessageTimerModificado extends Timer {
 						sent = true;
 					}
 					else  {
-						double chance = 70 - sender.vizinhos*3;
+						double chance = 70 - sender.vizinhos*1;
+						System.out.println("VIZINHOS " + sender.vizinhos);
 						if (rand < chance) {
+							System.out.println("Enviado com probabilidade " + chance +" e vizinhos " + sender.vizinhos);
 							this.node.broadcast(msg);
 							sent = true;
 						}
