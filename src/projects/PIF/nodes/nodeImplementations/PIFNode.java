@@ -17,6 +17,7 @@ import projects.PIF.nodes.messages.FEEDBACKMessage;
 import projects.PIF.nodes.messages.INFMessage;
 import projects.PIF.nodes.timers.MessageTimerModificado;
 import projects.PIF.nodes.timers.PIF_FeedbackTimer;
+import projects.PIF.nodes.timers.PrimTimer;
 import sinalgo.configuration.WrongConfigurationException;
 import sinalgo.gui.transformation.PositionTransformation;
 import sinalgo.nodes.Node;
@@ -80,7 +81,7 @@ public class PIFNode extends Node {
 					
 					//Agenda o FEEDBACK
 					feedbackTimer = new PIF_FeedbackTimer(this, TNO.TNO_FEEDBACK);
-					feedbackTimer.tnoStartRelative(10, this, TNO.TNO_FEEDBACK);
+					feedbackTimer.tnoStartRelative(13, this, TNO.TNO_FEEDBACK);
 					
 				}
 			}
@@ -136,15 +137,8 @@ public class PIFNode extends Node {
 	  			infMSG.startRelative(i*Utils.INTERVAL_INTANCES, this);
 	  		}
 	  		
-	  		new java.util.Timer().schedule( 
-	  		        new java.util.TimerTask() {
-	  		            @Override
-	  		            public void run() {
-	  		                PIFNode.prim();
-	  		            }
-	  		        }, 
-	  		        5000 
-	  		);
+	  		PrimTimer primTimer = new PrimTimer();
+	  		primTimer.startRelative(10, this);
 		}
 	}
     

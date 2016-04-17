@@ -2,8 +2,8 @@
 <sinalgo>
 	<ProjectSelector windowWidth="600" windowHeight="400" lastChosenProject="PIF" windowPosX="75" windowPosY="680" isMaximized="false" selectedTab="2" />
 	<GUI windowWidth="800" windowHeight="600" windowPosX="75" windowPosY="480" isMaximized="false" ControlPanelExpandSimulation="true" ControlPanelShowFullViewPanel="true" ControlPanelShowTextPanel="true" ControlPanelShowProjectControl="true" RunOperationIsLimited="false" helpWindowWidth="500" helpWindowHeight="500" helpWindowPosX="200" helpWindowPosY="200" helpWindowIsMaximized="false" />
-	<RandomSeed seedFromPreviousRun="3633616450141868308" />
-	<App lastSelectedFileDirectory="" checkForUpdatesAtStartup="true" updateCheckTimeStamp="1460934722255" runCmdLineArgs="-project PIF -gen 512 PIF:PIFNode Random -rounds 1000000 -batch -overwrite useFixedSeed=false dimX=1036 dimY=1036 " />
+	<RandomSeed seedFromPreviousRun="3454015118697224696" />
+	<App lastSelectedFileDirectory="" checkForUpdatesAtStartup="true" updateCheckTimeStamp="1460934722255" runCmdLineArgs="-project PIF -gen 512 PIF:PIFNode Random -rounds 1000000 -batch -overwrite useFixedSeed=false dimX=897 dimY=897 " />
 	<GenNodesDlg numNodes="2048" />
 </sinalgo>
 
