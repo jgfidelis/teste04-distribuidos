@@ -6,17 +6,19 @@ public class FEEDBACKMessage extends Message {
 	public int destinationID;
 	public int senderID;
 	public int sourceFeedbackID;
+	public int numero;
 
-	public FEEDBACKMessage(int sourceFeedbackID, int senderID, int destinationID) {
+	public FEEDBACKMessage(int sourceFeedbackID, int senderID, int destinationID, int numero) {
 		this.destinationID = destinationID;
 		this.senderID = senderID;
 		this.sourceFeedbackID = sourceFeedbackID;
+		this.numero = numero;
 	}
 
 	@Override
 	public Message clone() {
 		// TODO Auto-generated method stub
-		return new FEEDBACKMessage(this.sourceFeedbackID, this.senderID, this.destinationID);
+		return new FEEDBACKMessage(this.sourceFeedbackID, this.senderID, this.destinationID, this.numero);
 	}
 
 	public int getSourceFeedbackID() {

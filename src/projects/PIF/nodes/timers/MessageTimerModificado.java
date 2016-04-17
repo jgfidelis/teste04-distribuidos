@@ -101,6 +101,7 @@ public class MessageTimerModificado extends Timer {
 				boolean sent = false;
 				
 				if (this.node.ID == 1) {
+					((INFMessage) msg).distToNodeOne++;
 					this.node.broadcast(msg);
 					sent = true;
 				}
@@ -128,8 +129,18 @@ public class MessageTimerModificado extends Timer {
 					
 				}
 				//System.out.println("Enviadas: "+ PIFNode.SentINF);
-				System.out.println("Node: "+ this.node.ID +" broadcast INF numero " + ((INFMessage) msg).numero);
-				PIFNode.sentINF = PIFNode.sentINF + 1;
+				if (sent) {
+					
+//					if (((INFMessage) msg).numero == 1) {
+//						PIFNode.msgUm++;
+//						if (PIFNode.msgUm == PIFNode.nnodes) {
+//							System.out.println("COMECAR PRIM");
+//							PIFNode.prim();
+//						}
+//					}
+					System.out.println("Node: "+ this.node.ID +" broadcast INF numero " + ((INFMessage) msg).numero);
+					PIFNode.sentINF = PIFNode.sentINF + 1;
+				}
 			}
 			
 			
