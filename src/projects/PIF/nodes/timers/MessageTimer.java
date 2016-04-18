@@ -107,9 +107,10 @@ public class MessageTimer extends Timer {
 			}
 			
 			if(msg instanceof FEEDBACKMessage){
+				FEEDBACKMessage feedbackMesage = (FEEDBACKMessage) msg;
 				PIFNode.sentFeedback = PIFNode.sentFeedback + 1;
 				//System.out.println("Feedback Enviadas: "+ PIFNode.SentFeedback);
-				if ( this.node.ID == ((FEEDBACKMessage) msg).getSourceFeedbackID() ){
+				if ( feedbackMesage.getSourceFeedbackID().contains(this.node.ID) ){
 					System.out.println("Node: "+ this.node.ID +" broadcast FEEDBACK ");
 					this.node.setColor(Color.MAGENTA);
 				}

@@ -1,13 +1,10 @@
 package projects.PIF.nodes.nodeImplementations;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.List;
 import java.util.PriorityQueue;
-import java.util.Queue;
-import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Vector;
 
@@ -25,7 +22,7 @@ import sinalgo.nodes.messages.Inbox;
 import sinalgo.nodes.messages.Message;
 
 public class PIFNode extends Node {
-	//private boolean reached = false;
+	//private boolean g = false;
 	private boolean amLeaf = true;
 	private int nextHopToSource;
 	public static int sentINF = 0;
@@ -34,6 +31,7 @@ public class PIFNode extends Node {
 	public int vizinhos = 0;
 	public static int[] cobertura = new int[Utils.NUM_INSTANCES];
 	public static int nnodes = 0;
+	public static List<List<Integer>> feedback = new ArrayList<List<Integer>>(Utils.NUM_INSTANCES);
 	private boolean[] reached = new boolean[Utils.NUM_INSTANCES];
 	public static double sendChance = 40.0;
 	public static int msgUm = 0;
@@ -82,14 +80,14 @@ public class PIFNode extends Node {
 					msgINF.setSenderID(this.ID);
 					MessageTimerModificado infMSG = new MessageTimerModificado(msgINF);
 					infMSG.startRelative(0.1,this);
-					
+						
 					//Agenda o FEEDBACK
 					if(msgINF.numero == 1) {
 						feedbackTimer = new PIF_FeedbackTimer(this, TNO.FIRST_FEEDBACK);
-						feedbackTimer.tnoStartRelative(13, this, TNO.FIRST_FEEDBACK);
+						feedbackTimer.tnoStartRelative(5, this, TNO.FIRST_FEEDBACK);
 					} else {
 						feedbackTimer = new PIF_FeedbackTimer(this, TNO.TNO_FEEDBACK);
-						feedbackTimer.tnoStartRelative(13, this, TNO.TNO_FEEDBACK);
+						feedbackTimer.tnoStartRelative(5, this, TNO.TNO_FEEDBACK);
 					}			
 				}
 			}
@@ -99,11 +97,13 @@ public class PIFNode extends Node {
 				FEEDBACKMessage msgFeedback = (FEEDBACKMessage) msg;
 				if(msgFeedback.getDestinationID() == this.ID) {
 					if(this.ID == 1) {
+						feedback.get(msgFeedback.numero).addAll(msgFeedback.sourceFeedbackID);
 						System.out.println("Source node recebeu Feedback do Node "+ msgFeedback.getSourceFeedbackID());
 					} else {
-						System.out.print("Node " + this.ID + " recebeu feedback de " + msgFeedback.getSenderID() + ", redirecionando para " + this.father);
+						System.out.println("Node " + this.ID + " recebeu feedback de " + msgFeedback.getSenderID() + ", redirecionando para " + this.father);
 						this.amLeaf = false;
 						msgFeedback.setDestinationID(this.father);
+						msgFeedback.addSourceFeedbackID(this.ID);
 						MessageTimerModificado feedbackMSG = new MessageTimerModificado(msgFeedback);
 						feedbackMSG.startRelative(0.1,this);
 					}

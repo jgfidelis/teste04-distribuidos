@@ -8,10 +8,10 @@
 		<dimensions value="2" />
 
 		<!--Length of the deployment field along the x-axis.-->
-		<dimX value="2537" />
+		<dimX value="200" />
 
 		<!--Length of the deployment field along the y-axis.-->
-		<dimY value="2537" />
+		<dimY value="200" />
 
 		<!--Length of the deployment field along the z-axis.-->
 		<dimZ value="0" />
@@ -298,6 +298,6 @@
 <Log>
 	<LogFile value="infraLog.txt" />
 </Log>
-																															</Custom>
+																																	</Custom>
 </Document>
 

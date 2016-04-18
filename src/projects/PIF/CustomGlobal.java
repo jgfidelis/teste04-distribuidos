@@ -38,9 +38,14 @@ package projects.PIF;
 
 
     
-import java.util.Map;
+import java.util.List;
 
 import javax.swing.JOptionPane;
+
+import com.google.common.collect.ContiguousSet;
+import com.google.common.collect.DiscreteDomain;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Range;
 
 import projects.PIF.nodes.nodeImplementations.PIFNode;
 import sinalgo.runtime.AbstractCustomGlobal;
@@ -101,6 +106,7 @@ public class CustomGlobal extends AbstractCustomGlobal{
 		JOptionPane.showMessageDialog(null, "You Pressed the 'GO' button.");
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onExit() {				
 		int i = 0;
@@ -112,6 +118,15 @@ public class CustomGlobal extends AbstractCustomGlobal{
 			System.out.println("Cobertura na instancia " + i + ": " + nos_cobertos + " de " + PIFNode.nnodes);
 		}
 		System.out.println(Utils.NUM_INSTANCES);
+		
+		i = 0;
+		for(List<Integer> feedbackPerInstance : PIFNode.feedback) {
+			i++;
+			System.out.println("Feedback recebidos = "  + feedbackPerInstance.size());
+			System.out.println("Feedback recebidos de: " + feedbackPerInstance);
+			ContiguousSet<Integer> integerList = ContiguousSet.create(Range.closedOpen(1, Utils.NUM_INSTANCES), DiscreteDomain.integers());
+			System.out.println("Faltaram feedback de: " + integerList.removeAll(feedbackPerInstance));
+		}
 	}
 	
 
