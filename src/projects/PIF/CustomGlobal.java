@@ -38,14 +38,10 @@ package projects.PIF;
 
 
     
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
-
-import com.google.common.collect.ContiguousSet;
-import com.google.common.collect.DiscreteDomain;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Range;
 
 import projects.PIF.nodes.nodeImplementations.PIFNode;
 import sinalgo.runtime.AbstractCustomGlobal;
@@ -124,7 +120,10 @@ public class CustomGlobal extends AbstractCustomGlobal{
 			i++;
 			System.out.println("Feedback recebidos = "  + feedbackPerInstance.size());
 			System.out.println("Feedback recebidos de: " + feedbackPerInstance);
-			ContiguousSet<Integer> integerList = ContiguousSet.create(Range.closedOpen(1, Utils.NUM_INSTANCES), DiscreteDomain.integers());
+			List<Integer> integerList = new ArrayList<Integer>();
+			for(int j=1;j<Utils.NUM_INSTANCES+1;j++) {
+				integerList.add(j);
+			}
 			System.out.println("Faltaram feedback de: " + integerList.removeAll(feedbackPerInstance));
 		}
 	}
