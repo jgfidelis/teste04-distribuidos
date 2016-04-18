@@ -104,15 +104,15 @@ public class MessageTimerModificado extends Timer {
 					((INFMessage) msg).distToNodeOne++;
 					this.node.broadcast(msg);
 					sent = true;
-				}
-				
-				if (((INFMessage) msg).numero == 1) {
+				}else if (((INFMessage) msg).numero == 1) {
+					((INFMessage) msg).distToNodeOne++;
 					this.node.broadcast(msg); //se for a INF 1, fazer broadcast
 					sent = true;
 				} else {
 					int rand = new Random().nextInt(100);
 					PIFNode sender = (PIFNode) this.node;
 					if (sender.vizinhos == 2) {
+						((INFMessage) msg).distToNodeOne++;
 						this.node.broadcast(msg); //se só tem dois vizinhos, enviar
 						sent = true;
 					}
@@ -121,6 +121,7 @@ public class MessageTimerModificado extends Timer {
 						System.out.println("VIZINHOS " + sender.vizinhos);
 						if (rand < chance) {
 							System.out.println("Enviado com probabilidade " + chance +" e vizinhos " + sender.vizinhos);
+							((INFMessage) msg).distToNodeOne++;
 							this.node.broadcast(msg);
 							sent = true;
 						}
